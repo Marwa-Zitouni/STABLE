@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://example.org/thermal.owl"
+         xmlns="http://example.org/thermal.owl#"
+         xmlns:swrl="http://www.w3.org/2003/11/swrl#">
+
+<owl:Ontology rdf:about="http://example.org/thermal.owl"/>
+
+<owl:ObjectProperty rdf:about="#isPartOf">
+  <rdfs:domain rdf:resource="#Battery_Cell"/>
+  <rdfs:range rdf:resource="#Battery"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#hasSegment">
+  <rdfs:domain rdf:resource="#Anomaly"/>
+  <rdfs:range rdf:resource="#Segment"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#isLocatedIn">
+  <rdfs:domain rdf:resource="#Segment"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#concernedBy">
+  <rdfs:domain rdf:resource="#Anomaly"/>
+  <rdfs:range rdf:resource="#Battery_Cell"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#madeObservation">
+  <rdfs:domain rdf:resource="#ThermalSensor"/>
+  <rdfs:range rdf:resource="#Image"/>
+</owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:about="#hasFilePath">
+  <rdfs:domain rdf:resource="#Image"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#hasTemperature">
+  <rdfs:domain rdf:resource="#Segment"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#hasSize">
+  <rdfs:domain rdf:resource="#Segment"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#HasXCoordinate">
+  <rdfs:domain rdf:resource="#Pixel"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#HasYCoordinate">
+  <rdfs:domain rdf:resource="#Pixel"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
+<owl:Class rdf:about="#Image">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Segment">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Pixel">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Anomaly">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Battery">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Battery_Cell">
+  <rdfs:subClassOf rdf:resource="#Battery"/>
+</owl:Class>
+
+<owl:Class rdf:about="#HighTemperatureAnomaly">
+  <rdfs:subClassOf rdf:resource="#Anomaly"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ThermalImbalance">
+  <rdfs:subClassOf rdf:resource="#Anomaly"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ThermalSensor">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<swrl:Variable rdf:about="urn:swrl#a"/>
+
+<swrl:Variable rdf:about="urn:swrl#s"/>
+
+<swrl:Variable rdf:about="urn:swrl#t"/>
+
+<swrl:IndividualPropertyAtom>
+  <swrl:propertyPredicate rdf:resource="#isLocatedIn"/>
+</swrl:IndividualPropertyAtom>
+
+<swrl:BuiltinAtom>
+  <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
+  <swrl:arguments>
+    <rdf:Description>
+      <rdf:first rdf:resource="urn:swrl#t"/>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+          <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">32</rdf:first>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:arguments>
+</swrl:BuiltinAtom>
+
+<swrl:DatavaluedPropertyAtom>
+  <swrl:propertyPredicate rdf:resource="#hasTemperature"/>
+  <swrl:argument1 rdf:resource="urn:swrl#s"/>
+  <swrl:argument2 rdf:resource="urn:swrl#t"/>
+</swrl:DatavaluedPropertyAtom>
+
+<swrl:IndividualPropertyAtom>
+  <swrl:propertyPredicate rdf:resource="#hasSegment"/>
+  <swrl:argument1 rdf:resource="urn:swrl#a"/>
+  <swrl:argument2 rdf:resource="urn:swrl#s"/>
+</swrl:IndividualPropertyAtom>
+
+<swrl:ClassAtom>
+  <swrl:classPredicate rdf:resource="#Anomaly"/>
+  <swrl:argument1 rdf:resource="urn:swrl#a"/>
+</swrl:ClassAtom>
+
+<swrl:Imp/>
+
+
+</rdf:RDF>
